@@ -7,47 +7,53 @@ import {
   View,
 } from 'react-native'
 
-const App = ({
-  instructions,
-}) => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>
-      Welcome to React Native!
-    </Text>
-    <Text style={styles.instructions}>
-      To get started, edit index.{Platform.OS}.js
-    </Text>
-    <Text style={styles.instructions}>
-      {instructions}
-    </Text>
-  </View>
-)
+import Counter from './Counter'
 
-App.propTypes = {
-  instructions: PropTypes.string,
-}
+class App extends Component {
+  static propTypes = {
+   instructions: React.PropTypes.string
+  }
 
-App.defaultProps = {
-  ...Component.defaultProps,
-  instructions: 'Usage instructions not provided.',
+  static defaultProps = {
+    ...Component.defaultProps,
+    instructions: 'Usage instructions not provided.',
+  }
+
+  render () {
+  //TODO 2v2, free for all with 3 or 4
+    return (
+      <View style={styles.container}>
+        <View style={styles.upperContainer}>
+          <Counter max={20} min={0} stepValue={1} isInverted={true}/>
+        </View>
+        <View style={styles.lowerContainer}>
+          <Counter max={20} min={0} stepValue={1}/>
+        </View>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  upperContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  lowerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+  },
+  lifeTotal: {
+    fontSize: 120,
   },
 })
 
