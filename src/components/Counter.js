@@ -17,6 +17,7 @@ export default class Counter extends Component {
     max: React.PropTypes.number, // The maximum possible value for the counter
     min: React.PropTypes.number, // The minimum possible value for the counter
     stepValue: React.PropTypes.number, // The number to increment by
+    initialValue: React.PropTypes.number, // The initial counter value
   }
 
   static defaultProps = {
@@ -24,12 +25,13 @@ export default class Counter extends Component {
     min: 0,
     stepValue: 1,
     isInverted: false,
+    initialValue: 20,
   }
 
   constructor (props) {
     super(props)
     this.state = {
-     value: 0,
+     value: this.props.initialValue,
     }
   }
 
