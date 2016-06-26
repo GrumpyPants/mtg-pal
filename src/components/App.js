@@ -42,14 +42,10 @@ const styles = StyleSheet.create({
   },
   upperContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     borderWidth: 1,
   },
   lowerContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     borderWidth: 1,
   },
   lifeTotal: {
