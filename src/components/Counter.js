@@ -15,22 +15,23 @@ import {
 } from 'react-native'
 
 import * as Animatable from 'react-native-animatable'
+import {observer} from 'mobx-react/native'
 
 import CounterNumber from './CounterNumber'
 import PlayerName from './PlayerName'
 
+@observer
 export default class Counter extends Component {
   static propTypes = {
-    max: React.PropTypes.number, // The maximum possible value for the counter
     min: React.PropTypes.number, // The minimum possible value for the counter
     stepValue: React.PropTypes.number, // The number to increment by
     initialValue: React.PropTypes.number, // The initial counter value
     playerName: React.PropTypes.string, // The name of the player
     customCounters: React.PropTypes.array, // The name of the player
+    player: React.PropTypes.object, // player
   }
 
   static defaultProps = {
-    max: 20,
     min: 0,
     stepValue: 1,
     isInverted: false,
@@ -61,15 +62,18 @@ export default class Counter extends Component {
   }
 
   onDecrementPressDownHandler () {
-    this.decrementCounter()
+    this.props.player.life--
+    //this.decrementCounter()
   }
 
   onIncrementPressDownHandler () {
-    this.incrementCounter()
+    this.props.player.life++
+
+    //this.incrementCounter()
   }
 
   onPressOutHandler () {
-    this.setState({'pressed': false})
+    //this.setState({'pressed': false})
   }
 
   updateNumberMargins (dimensions) {
@@ -118,11 +122,11 @@ export default class Counter extends Component {
       </TouchableHighlight>
 
       <View style={[styles.number, numberStyleObject]}>
-        <CounterNumber value={this.state.value} onLayoutChange={this.updateNumberMargins.bind(this)}/>
+        <CounterNumber value={this.props.player.life} onLayoutChange={this.updateNumberMargins.bind(this)}/>
       </View>
 
       <View style={[styles.playerName, playerNameStyleObject]}>
-        <PlayerName onLayoutChange={this.updatePlayerNameMargins.bind(this)}/>
+        <PlayerName playerName={this.props.player.name} onLayoutChange={this.updatePlayerNameMargins.bind(this)}/>
       </View>
     </View>
     )

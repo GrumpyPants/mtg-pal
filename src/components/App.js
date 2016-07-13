@@ -5,9 +5,12 @@ import {
   StyleSheet,
   Text,
   View,
+  Navigator,
 } from 'react-native'
 
-import Counter from './Counter'
+import TwoPlayerBoard from './TwoPlayerBoard'
+import Settings from './Settings'
+import MTGHelperStore from '../store/MTGHelperStore'
 
 class App extends Component {
   static propTypes = {
@@ -19,17 +22,33 @@ class App extends Component {
     instructions: 'Usage instructions not provided.',
   }
 
+  renderScene (route, navigator) {
+    switch (route.id) {
+      case 'settings':
+        return <Settings navigator={navigator} />;
+      default:
+        return (
+          <TwoPlayerBoard
+            name={route.name}
+            navigator={navigator}
+            {...route.passProps}
+          />
+        )
+    }
+  }
+
   render () {
   //TODO 2v2, free for all with 3 or 4
     return (
-      <View style={styles.container}>
-        <View style={styles.upperContainer}>
-          <Counter max={20} min={0} stepValue={1} isInverted={true}/>
-        </View>
-        <View style={styles.lowerContainer}>
-          <Counter max={20} min={0} stepValue={1}/>
-        </View>
-      </View>
+      <Navigator initialRoute={{
+                   name: 'Counter Screen',
+                   index: 0,
+                   passProps: {
+                     store: MTGHelperStore
+                   }
+                 }}
+                 renderScene={this.renderScene.bind(this)}
+      />
     )
   }
 }
@@ -50,6 +69,10 @@ const styles = StyleSheet.create({
   },
   lifeTotal: {
     fontSize: 120,
+  },
+  menuBar: {
+    backgroundColor: 'black',
+    borderWidth: 1,
   },
 })
 
