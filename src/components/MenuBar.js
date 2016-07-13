@@ -81,10 +81,46 @@ export default class MenuBar extends Component {
 
   getLifeTotalMenu () {
     const backIcon = (<Icon name="arrow-left" size={30} color="white" onPress={this.onBackToMainMenuPressed.bind(this, 'lifeMenu')}/>)
-    const lifeIcon20 = (<Icon name="heart" size={30} color="white" onPress={this.setLifeTotal.bind(this, 20)}/>)
-    const lifeIcon30 = (<Icon name="heart" size={30} color="white" onPress={this.setLifeTotal.bind(this, 30)}/>)
-    const lifeIcon40 = (<Icon name="heart" size={30} color="white" onPress={this.setLifeTotal.bind(this, 40)}/>)
-    const lifeIcon50 = (<Icon name="heart" size={30} color="white" onPress={this.setLifeTotal.bind(this, 50)}/>)
+
+    const lifeIcon20 = (
+      <TouchableHighlight onPress={this.setLifeTotal.bind(this, 20)}>
+        <Image
+          style={styles.button}
+          source={require('../img/20-health.png')}
+        />
+      </TouchableHighlight>
+    )
+
+    const lifeIcon30 = (
+      <TouchableHighlight onPress={this.setLifeTotal.bind(this, 30)}>
+        <Image
+          style={styles.button}
+          source={require('../img/30-health.png')}
+        />
+      </TouchableHighlight>
+    )
+
+    const lifeIcon40 = (
+      <TouchableHighlight onPress={this.setLifeTotal.bind(this, 40)}>
+        <Image
+          style={styles.button}
+          source={require('../img/40-health.png')}
+        />
+      </TouchableHighlight>
+    )
+
+    const lifeIcon50 = (
+      <TouchableHighlight onPress={this.setLifeTotal.bind(this, 50)}>
+        <Image
+          style={styles.button}
+          source={require('../img/50-health.png')}
+        />
+      </TouchableHighlight>
+    )
+
+    //const lifeIcon30 = (<Icon name="heart" size={30} color="white" onPress={this.setLifeTotal.bind(this, 30)}/>)
+    //const lifeIcon40 = (<Icon name="heart" size={30} color="white" onPress={this.setLifeTotal.bind(this, 40)}/>)
+    //const lifeIcon50 = (<Icon name="heart" size={30} color="white" onPress={this.setLifeTotal.bind(this, 50)}/>)
 
     return (
       <Animatable.View ref='lifeMenu' style={styles.container}>
@@ -167,6 +203,5 @@ const styles = StyleSheet.create({
   button: {
     width: 30,
     height: 30,
-    //marginRight: 10,
   },
 })
