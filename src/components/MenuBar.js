@@ -118,10 +118,6 @@ export default class MenuBar extends Component {
       </TouchableHighlight>
     )
 
-    //const lifeIcon30 = (<Icon name="heart" size={30} color="white" onPress={this.setLifeTotal.bind(this, 30)}/>)
-    //const lifeIcon40 = (<Icon name="heart" size={30} color="white" onPress={this.setLifeTotal.bind(this, 40)}/>)
-    //const lifeIcon50 = (<Icon name="heart" size={30} color="white" onPress={this.setLifeTotal.bind(this, 50)}/>)
-
     return (
       <Animatable.View ref='lifeMenu' style={styles.container}>
         {backIcon}
@@ -133,8 +129,8 @@ export default class MenuBar extends Component {
     )
   }
 
-  onChangeNumPlayersPressed () {
-
+  onChangeNumPlayersPressed (numPlayers) {
+    this.props.store.setNumPlayers(numPlayers)
   }
 
   getPlayersMenu () {
