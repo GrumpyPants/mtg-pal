@@ -139,9 +139,32 @@ export default class MenuBar extends Component {
 
   getPlayersMenu () {
     const backIcon = (<Icon name="arrow-left" size={30} color="white" onPress={this.onBackToMainMenuPressed.bind(this, 'playersMenu')}/>)
-    const twoPlayerIcon = (<Icon name="heart" size={30} color="white" onPress={this.onChangeNumPlayersPressed.bind(this)}/>)
-    const threePlayerIcon = (<Icon name="heart" size={30} color="white" onPress={this.onChangeNumPlayersPressed.bind(this)}/>)
-    const fourPlayerIcon = (<Icon name="heart" size={30} color="white" onPress={this.onChangeNumPlayersPressed.bind(this)}/>)
+    const twoPlayerIcon = (
+      <TouchableHighlight onPress={this.onChangeNumPlayersPressed.bind(this, 2)}>
+        <Image
+          style={styles.button}
+          source={require('../img/2Players.png')}
+        />
+      </TouchableHighlight>
+    )
+
+    const threePlayerIcon = (
+      <TouchableHighlight onPress={this.onChangeNumPlayersPressed.bind(this, 3)}>
+        <Image
+          style={styles.button}
+          source={require('../img/3Players.png')}
+        />
+      </TouchableHighlight>
+    )
+
+    const fourPlayerIcon = (
+      <TouchableHighlight onPress={this.onChangeNumPlayersPressed.bind(this, 4)}>
+        <Image
+          style={styles.button}
+          source={require('../img/4Players.png')}
+        />
+      </TouchableHighlight>
+    )
 
     return (
       <Animatable.View ref='playersMenu' style={styles.container}>
