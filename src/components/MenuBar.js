@@ -130,7 +130,12 @@ export default class MenuBar extends Component {
   }
 
   onChangeNumPlayersPressed (numPlayers) {
-    this.props.store.setNumPlayers(numPlayers)
+    if (this.props.store.players.length === numPlayers) {
+      this.props.store.resetLifeTotals()
+    }
+    else {
+      this.props.store.setNumPlayers(numPlayers)
+    }
   }
 
   getPlayersMenu () {
