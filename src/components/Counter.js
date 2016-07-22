@@ -108,7 +108,7 @@ export default class Counter extends Component {
     }
 
     return (
-    <View style={styles.container} onLayout={this.onLayout.bind(this)}>
+    <View style={[styles.container, this.props.isInverted && styles.inverted]} onLayout={this.onLayout.bind(this)}>
       <TouchableHighlight onPress={this.onDecrementPressDownHandler.bind(this)}
                           onPressOut={this.onPressOutHandler.bind(this)}
                           style={styles.leftHalfContainer}>
