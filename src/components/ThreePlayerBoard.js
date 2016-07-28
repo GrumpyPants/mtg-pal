@@ -19,7 +19,7 @@ import Counter from './Counter'
 import MenuBar from './MenuBar'
 
 @observer
-export default class TwoPlayerBoard extends Component {
+export default class ThreePlayerBoard extends Component {
 
   static propTypes = {
 
@@ -42,16 +42,19 @@ export default class TwoPlayerBoard extends Component {
         <StatusBar hidden={true} />
 
         <View style={styles.upperContainer}>
-          <Counter min={0} player={this.props.store.players[0]} stepValue={1} isInverted={true}/>
+          <View style={styles.upperLeftContainer}>
+            <Counter min={0} player={this.props.store.players[1]} stepValue={1} facing="left"/>
+          </View>
+
+          <View style={styles.upperRightContainer}>
+            <Counter min={0} player={this.props.store.players[2]} stepValue={1} facing="right"/>
+          </View>
         </View>
 
-        <MenuBar style={styles.menuBar}
-                 navigator={this.props.navigator}
-                 store={this.props.store}
-                 onSetLifeTotal={this.onSetLifeTotal.bind(this)}/>
+        <MenuBar style={styles.menuBar} navigator={this.props.navigator} store={this.props.store} onSetLifeTotal={this.onSetLifeTotal.bind(this)}/>
 
         <View style={styles.lowerContainer}>
-          <Counter min={0} player={this.props.store.players[1]} stepValue={1}/>
+          <Counter min={0} player={this.props.store.players[0]} stepValue={1}/>
         </View>
       </View>
     )
@@ -65,6 +68,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   upperContainer: {
+    flex: 2,
+    flexDirection: 'row',
+    borderWidth: 1,
+  },
+  upperLeftContainer: {
+    flex: 1,
+    borderWidth: 1,
+  },
+  upperRightContainer: {
     flex: 1,
     borderWidth: 1,
   },

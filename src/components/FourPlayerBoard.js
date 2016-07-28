@@ -19,7 +19,7 @@ import Counter from './Counter'
 import MenuBar from './MenuBar'
 
 @observer
-export default class TwoPlayerBoard extends Component {
+export default class FourPlayerBoard extends Component {
 
   static propTypes = {
 
@@ -45,10 +45,15 @@ export default class TwoPlayerBoard extends Component {
           <Counter min={0} player={this.props.store.players[0]} stepValue={1} isInverted={true}/>
         </View>
 
-        <MenuBar style={styles.menuBar}
-                 navigator={this.props.navigator}
-                 store={this.props.store}
-                 onSetLifeTotal={this.onSetLifeTotal.bind(this)}/>
+        <View style={styles.upperContainer}>
+          <Counter min={0} player={this.props.store.players[0]} stepValue={1} isInverted={true}/>
+        </View>
+
+        <View style={styles.upperContainer}>
+          <Counter min={0} player={this.props.store.players[0]} stepValue={1} isInverted={true}/>
+        </View>
+
+        <MenuBar style={styles.menuBar} navigator={this.props.navigator} store={this.props.store} onSetLifeTotal={this.onSetLifeTotal.bind(this)}/>
 
         <View style={styles.lowerContainer}>
           <Counter min={0} player={this.props.store.players[1]} stepValue={1}/>

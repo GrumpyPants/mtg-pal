@@ -9,6 +9,8 @@ import {
 } from 'react-native'
 
 import TwoPlayerBoard from './TwoPlayerBoard'
+import ThreePlayerBoard from './ThreePlayerBoard'
+import FourPlayerBoard from './FourPlayerBoard'
 import Settings from './Settings'
 import MTGHelperStore from '../store/MTGHelperStore'
 
@@ -25,7 +27,34 @@ class App extends Component {
   renderScene (route, navigator) {
     switch (route.id) {
       case 'settings':
-        return <Settings navigator={navigator} />;
+        return <Settings navigator={navigator} />
+      case '2Players':
+        return (
+          <TwoPlayerBoard
+            name={route.name}
+            store={route.store}
+            navigator={navigator}
+            {...route.passProps}
+          />
+        )
+      case '3Players':
+        return (
+          <ThreePlayerBoard
+            name={route.name}
+            navigator={navigator}
+            store={route.store}
+            {...route.passProps}
+          />
+        )
+      case '4Players':
+        return (
+          <FourPlayerBoard
+            name={route.name}
+            store={route.store}
+            navigator={navigator}
+            {...route.passProps}
+          />
+        )
       default:
         return (
           <TwoPlayerBoard
@@ -38,7 +67,6 @@ class App extends Component {
   }
 
   render () {
-  //TODO 2v2, free for all with 3 or 4
     return (
       <Navigator initialRoute={{
                    name: 'Counter Screen',

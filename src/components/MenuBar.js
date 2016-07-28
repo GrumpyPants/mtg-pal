@@ -135,6 +135,7 @@ export default class MenuBar extends Component {
     }
     else {
       this.props.store.setNumPlayers(numPlayers)
+      this.props.navigator.replace({id:numPlayers + 'Players', store: this.props.store})
     }
   }
 
