@@ -100,12 +100,14 @@ export default class Counter extends Component {
         touchableOpacityStyle.borderTopRightRadius = 30
         minusIconStyle.top = 4
         minusIconStyle.left = 4
+        minusIconStyle.transform = [{rotate: '90deg'}]
         break
       case 'right':
         touchableOpacityStyle.borderBottomLeftRadius = 30
         touchableOpacityStyle.borderBottomRightRadius = 30
         minusIconStyle.bottom = 4
         minusIconStyle.right = 4
+        minusIconStyle.transform = [{rotate: '90deg'}]
         break
       default:
         touchableOpacityStyle.borderTopLeftRadius = 30

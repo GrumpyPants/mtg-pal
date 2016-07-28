@@ -23,6 +23,7 @@ export default class MenuBar extends Component {
 
   static propTypes = {
     onSetLifeTotal: React.PropTypes.func.isRequired, // handler for when the life total changes
+    store: React.PropTypes.object.isRequired, // the magic store
   }
 
   static defaultProps = {
@@ -178,11 +179,39 @@ export default class MenuBar extends Component {
     )
   }
 
+  getLifeIcon (lifeTotal) {
+    let icon
+    switch (lifeTotal) {
+      case 30:
+        icon = require('../img/30-health.png')
+        break
+      case 40:
+        icon = require('../img/40-health.png')
+        break
+      case 50:
+        icon = require('../img/50-health.png')
+        break
+      default:
+        icon = require('../img/20-health.png')
+    }
+
+    return (
+      <TouchableHighlight onPress={this.transitionMenu.bind(this, 'lifeMenu')}>
+        <Image
+          style={styles.button}
+          source={icon}
+        />
+      </TouchableHighlight>
+    )
+  }
+
   getMenuView () {
     const settingsIcon = (<Icon name="cog" size={30} color="white" onPress={this.onSettingsPressed.bind(this)}/>)
     const numPlayersIcon = (<Icon name="users" size={30} color="white" onPress={this.transitionMenu.bind(this, 'playersMenu')}/>)
-    const lifeIcon = (<Icon name="heart" size={30} color="white" onPress={this.transitionMenu.bind(this, 'lifeMenu')}/>)
+    //const lifeIcon = (<Icon name="heart" size={30} color="white" onPress={this.transitionMenu.bind(this, 'lifeMenu')}/>)
     const resetIcon = (<Icon name="refresh" size={30} color="white" onPress={this.onResetPressed.bind(this)}/>)
+
+    const lifeIcon = this.getLifeIcon(this.props.store.lifeTotal)
 
     const rollDiceIcon = (
       <TouchableHighlight onPress={this.onDiceRollPressed}>
