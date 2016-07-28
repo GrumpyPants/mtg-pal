@@ -42,21 +42,25 @@ export default class FourPlayerBoard extends Component {
         <StatusBar hidden={true} />
 
         <View style={styles.upperContainer}>
-          <Counter min={0} player={this.props.store.players[0]} stepValue={1} isInverted={true}/>
-        </View>
+          <View style={styles.cardContainer}>
+            <Counter min={0} player={this.props.store.players[2]} stepValue={1} facing="left"/>
+          </View>
 
-        <View style={styles.upperContainer}>
-          <Counter min={0} player={this.props.store.players[0]} stepValue={1} isInverted={true}/>
-        </View>
-
-        <View style={styles.upperContainer}>
-          <Counter min={0} player={this.props.store.players[0]} stepValue={1} isInverted={true}/>
+          <View style={styles.cardContainer}>
+            <Counter min={0} player={this.props.store.players[3]} stepValue={1} facing="right"/>
+          </View>
         </View>
 
         <MenuBar style={styles.menuBar} navigator={this.props.navigator} store={this.props.store} onSetLifeTotal={this.onSetLifeTotal.bind(this)}/>
 
         <View style={styles.lowerContainer}>
-          <Counter min={0} player={this.props.store.players[1]} stepValue={1}/>
+          <View style={styles.cardContainer}>
+            <Counter min={0} player={this.props.store.players[0]} stepValue={1} facing="left"/>
+          </View>
+
+          <View style={styles.cardContainer}>
+            <Counter min={0} player={this.props.store.players[1]} stepValue={1} facing="right"/>
+          </View>
         </View>
       </View>
     )
@@ -71,10 +75,16 @@ const styles = StyleSheet.create({
   },
   upperContainer: {
     flex: 1,
+    flexDirection: 'row',
+    borderWidth: 1,
+  },
+  cardContainer: {
+    flex: 1,
     borderWidth: 1,
   },
   lowerContainer: {
     flex: 1,
+    flexDirection: 'row',
     borderWidth: 1,
   },
   lifeTotal: {
