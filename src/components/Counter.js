@@ -104,7 +104,7 @@ export default class Counter extends Component {
       case 'right':
         touchableOpacityStyle.borderBottomLeftRadius = 30
         touchableOpacityStyle.borderBottomRightRadius = 30
-        minusIconStyle.top = 4
+        minusIconStyle.bottom = 4
         minusIconStyle.right = 4
         break
       default:
@@ -137,7 +137,7 @@ export default class Counter extends Component {
         touchableOpacityStyle.borderTopLeftRadius = 30
         touchableOpacityStyle.borderTopRightRadius = 30
         plusIconStyle.right = 4
-        plusIconStyle.bottom = 4
+        plusIconStyle.top = 4
         break
       default:
         touchableOpacityStyle.borderTopRightRadius = 30
