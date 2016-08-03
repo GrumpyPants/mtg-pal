@@ -42,7 +42,7 @@ export default class TwoPlayerBoard extends Component {
         <StatusBar hidden={true} />
 
         <View style={styles.upperContainer}>
-          <Counter min={0} player={this.props.store.players[0]} stepValue={1} isInverted={true}/>
+          <Counter min={0} player={this.props.store.players[0]} stepValue={1} facing='up'/>
         </View>
 
         <MenuBar style={styles.menuBar}

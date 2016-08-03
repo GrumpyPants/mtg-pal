@@ -109,6 +109,12 @@ export default class Counter extends Component {
         minusIconStyle.right = 4
         minusIconStyle.transform = [{rotate: '90deg'}]
         break
+      case 'up':
+        touchableOpacityStyle.borderTopRightRadius = 30
+        touchableOpacityStyle.borderBottomRightRadius = 30
+        minusIconStyle.top = 4
+        minusIconStyle.right = 4
+        break
       default:
         touchableOpacityStyle.borderTopLeftRadius = 30
         touchableOpacityStyle.borderBottomLeftRadius = 30
@@ -140,6 +146,12 @@ export default class Counter extends Component {
         touchableOpacityStyle.borderTopRightRadius = 30
         plusIconStyle.right = 4
         plusIconStyle.top = 4
+        break
+      case 'up':
+        touchableOpacityStyle.borderTopLeftRadius = 30
+        touchableOpacityStyle.borderBottomLeftRadius = 30
+        plusIconStyle.top = 4
+        plusIconStyle.left = 4
         break
       default:
         touchableOpacityStyle.borderTopRightRadius = 30
@@ -209,11 +221,11 @@ export default class Counter extends Component {
     }
 
     let incrementDecrementSections = [this.getDecrementHalf(), this.getIncrementHalf()]
-    if (this.props.facing === 'right')
+    if (this.props.facing === 'right' || this.props.facing === 'up')
       incrementDecrementSections =  [this.getIncrementHalf(), this.getDecrementHalf()]
 
     return (
-    <View style={[styles.container, {flexDirection: this.props.facing ? 'column' : 'row'}]} onLayout={this.onLayout.bind(this)}>
+    <View style={[styles.container, {flexDirection: this.props.facing === 'right' || this.props.facing === 'left' ? 'column' : 'row'}]} onLayout={this.onLayout.bind(this)}>
 
       {incrementDecrementSections}
 
