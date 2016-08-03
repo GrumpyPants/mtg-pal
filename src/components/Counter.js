@@ -16,6 +16,7 @@ import {
 
 import * as Animatable from 'react-native-animatable'
 import {observer} from 'mobx-react/native'
+import {BlurView} from 'react-native-blur';
 
 import CounterNumber from './CounterNumber'
 import PlayerName from './PlayerName'
@@ -240,6 +241,19 @@ export default class Counter extends Component {
                     playerName={this.props.player.name}
                     onLayoutChange={this.updatePlayerNameMargins.bind(this)}/>
       </View>
+
+      <View style={[styles.blurContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
+        <BlurView blurType="light" style={[styles.blur]}>
+          <View style={[styles.blurContentContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
+            <Image
+              style={[styles.diceImage, {width: this.state.dimensions.width / 4, height: this.state.dimensions.height / 4}]}
+              source={require('../img/dice6.png')}
+            />
+            <Text style={styles.diceWinnerText}>Winner!</Text>
+          </View>
+        </BlurView>
+      </View>
+
     </View>
     )
   }
@@ -252,7 +266,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     margin: 2,
     backgroundColor:'transparent',
-    //backgroundColor:'green',
   },
   facingUp: {
     transform: [{rotate: '180deg'}],
@@ -282,5 +295,25 @@ const styles = StyleSheet.create({
   },
   playerName: {
     position: 'absolute',
-  }
+  },
+  blurContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    borderRadius: 30,
+  },
+  blurContentContainer: {
+    flex: 1,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  diceImage: {
+    width: 30,
+    height: 30,
+  },
+  diceWinnerText: {
+    marginTop: 10,
+    fontSize: 18
+  },
 })
