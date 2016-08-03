@@ -42,7 +42,7 @@ export default class TwoPlayerBoard extends Component {
         <StatusBar hidden={true} />
 
         <View style={styles.upperContainer}>
-          <Counter min={0} player={this.props.store.players[0]} stepValue={1} facing='up'/>
+          <Counter min={0} store={this.props.store} doRollDiceAnimation={this.props.store.isRollingDiceAnimationActive} player={this.props.store.players[0]} stepValue={1} facing='up'/>
         </View>
 
         <MenuBar style={styles.menuBar}
@@ -51,7 +51,7 @@ export default class TwoPlayerBoard extends Component {
                  onSetLifeTotal={this.onSetLifeTotal.bind(this)}/>
 
         <View style={styles.lowerContainer}>
-          <Counter min={0} player={this.props.store.players[1]} stepValue={1}/>
+          <Counter min={0} store={this.props.store} doRollDiceAnimation={this.props.store.isRollingDiceAnimationActive} player={this.props.store.players[1]} stepValue={1}/>
         </View>
       </View>
     )

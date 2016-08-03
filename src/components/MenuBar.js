@@ -59,7 +59,7 @@ export default class MenuBar extends Component {
   }
 
   onDiceRollPressed () {
-    console.log('TODO: roll em')
+    this.props.store.rollDice()
   }
 
   onBackToMainMenuPressed (menuRef) {
@@ -208,13 +208,12 @@ export default class MenuBar extends Component {
   getMenuView () {
     const settingsIcon = (<Icon name="cog" size={30} color="white" onPress={this.onSettingsPressed.bind(this)}/>)
     const numPlayersIcon = (<Icon name="users" size={30} color="white" onPress={this.transitionMenu.bind(this, 'playersMenu')}/>)
-    //const lifeIcon = (<Icon name="heart" size={30} color="white" onPress={this.transitionMenu.bind(this, 'lifeMenu')}/>)
     const resetIcon = (<Icon name="refresh" size={30} color="white" onPress={this.onResetPressed.bind(this)}/>)
 
     const lifeIcon = this.getLifeIcon(this.props.store.lifeTotal)
 
     const rollDiceIcon = (
-      <TouchableHighlight onPress={this.onDiceRollPressed}>
+      <TouchableHighlight onPress={this.onDiceRollPressed.bind(this)}>
         <Image
           style={styles.button}
           source={require('../img/dice5.png')}

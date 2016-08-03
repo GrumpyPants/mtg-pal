@@ -6,6 +6,7 @@ import React, {
 import {
   Image,
   TouchableHighlight,
+  TouchableWithoutFeedback,
   Platform,
   StyleSheet,
   Text,
@@ -20,6 +21,7 @@ import {BlurView} from 'react-native-blur';
 
 import CounterNumber from './CounterNumber'
 import PlayerName from './PlayerName'
+import Sound from 'react-native-sound'
 
 @observer
 export default class Counter extends Component {
@@ -43,20 +45,42 @@ export default class Counter extends Component {
 
   constructor (props) {
     super(props)
+
+    this.clickSound = new Sound('click.wav', Sound.MAIN_BUNDLE, (error) => {
+      if (error) {
+        console.log('failed to load the sound', error);
+      } else { // loaded successfully
+        console.log('duration in seconds: ' + this.clickSound.getDuration() +
+          'number of channels: ' + this.clickSound.getNumberOfChannels());
+      }
+    });
+
     this.state = {
      value: this.props.initialValue,
-     dimensions: {}
+     dimensions: {},
+     roll: null
     }
   }
 
-  decrementCounter () {
-    this.setState({value: this.state.value - this.props.stepValue})
+  componentWillReceiveProps (newProps){
+    if (newProps.doRollDiceAnimation) {
+      this.doDiceRollAnimation()
+    }
   }
 
-  incrementCounter () {
-    this.setState({
-      value: this.state.value + this.props.stepValue,
-    })
+  doDiceRollAnimation () {
+    const _this = this
+    this.setState({isWinner: false})
+
+    const intervalID = window.setInterval(() => {
+      _this.setState({roll: Math.floor(Math.random() * 6) + 1})
+    }, 200)
+
+    window.setTimeout(() => {
+      window.clearInterval(intervalID)
+      _this.setState({roll: this.props.player.roll, isWinner: _this.props.player.winner})
+      _this.props.store.isRollingDiceAnimationActive = false
+    }, 2000)
   }
 
   onLayout (event) {
@@ -64,18 +88,16 @@ export default class Counter extends Component {
   }
 
   onDecrementPressDownHandler () {
+    this.clickSound.play()
     this.props.player.life--
-    //this.decrementCounter()
   }
 
   onIncrementPressDownHandler () {
+    this.clickSound.play()
     this.props.player.life++
-
-    //this.incrementCounter()
   }
 
   onPressOutHandler () {
-    //this.setState({'pressed': false})
   }
 
   updateNumberMargins (dimensions) {
@@ -170,6 +192,11 @@ export default class Counter extends Component {
     )
   }
 
+  handleRollViewPressed () {
+    this.props.store.isRollingDiceViewVisible = false
+    this.setState({roll: null, isWinner: null})
+  }
+
   render () {
     const topPosition = this.state.dimensions.height / 2
     const leftPosition = this.state.dimensions.width / 2
@@ -225,6 +252,30 @@ export default class Counter extends Component {
     if (this.props.facing === 'right' || this.props.facing === 'up')
       incrementDecrementSections =  [this.getIncrementHalf(), this.getDecrementHalf()]
 
+    let diceIcon
+    switch (this.state.roll) {
+      case 1:
+        diceIcon = require('../img/dice1.png')
+        break
+      case 2:
+        diceIcon = require('../img/dice2.png')
+        break
+      case 3:
+        diceIcon = require('../img/dice3.png')
+        break
+      case 4:
+        diceIcon = require('../img/dice4.png')
+        break
+      case 5:
+        diceIcon = require('../img/dice5.png')
+        break
+      case 6:
+        diceIcon = require('../img/dice6.png')
+        break
+      default:
+        diceIcon = require('../img/dice1.png')
+    }
+
     return (
     <View style={[styles.container, {flexDirection: this.props.facing === 'right' || this.props.facing === 'left' ? 'column' : 'row'}]} onLayout={this.onLayout.bind(this)}>
 
@@ -241,18 +292,23 @@ export default class Counter extends Component {
                     playerName={this.props.player.name}
                     onLayoutChange={this.updatePlayerNameMargins.bind(this)}/>
       </View>
-
-      <View style={[styles.blurContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
-        <BlurView blurType="light" style={[styles.blur]}>
-          <View style={[styles.blurContentContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
-            <Image
-              style={[styles.diceImage, {width: this.state.dimensions.width / 4, height: this.state.dimensions.height / 4}]}
-              source={require('../img/dice6.png')}
-            />
-            <Text style={styles.diceWinnerText}>Winner!</Text>
-          </View>
-        </BlurView>
-      </View>
+      { this.props.store.isRollingDiceViewVisible ?
+        <TouchableWithoutFeedback onPress={this.handleRollViewPressed.bind(this)}>
+        <View
+          style={[styles.blurContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
+          <BlurView blurType="light" style={[styles.blur]}>
+            <View
+              style={[styles.blurContentContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
+              <Image
+                style={[styles.diceImage]}
+                source={diceIcon}
+              />
+              {this.state.isWinner ? <Text style={styles.diceWinnerText}>Winner!</Text> : null}
+            </View>
+          </BlurView>
+        </View>
+        </TouchableWithoutFeedback> : null
+      }
 
     </View>
     )
@@ -309,8 +365,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   diceImage: {
-    width: 30,
-    height: 30,
+    width: 100,
+    height: 100,
   },
   diceWinnerText: {
     marginTop: 10,

@@ -43,18 +43,18 @@ export default class ThreePlayerBoard extends Component {
 
         <View style={styles.upperContainer}>
           <View style={styles.upperLeftContainer}>
-            <Counter min={0} player={this.props.store.players[1]} stepValue={1} facing="left"/>
+            <Counter min={0} store={this.props.store} doRollDiceAnimation={this.props.store.isRollingDiceAnimationActive} player={this.props.store.players[1]} stepValue={1} facing="left"/>
           </View>
 
           <View style={styles.upperRightContainer}>
-            <Counter min={0} player={this.props.store.players[2]} stepValue={1} facing="right"/>
+            <Counter min={0} store={this.props.store} doRollDiceAnimation={this.props.store.isRollingDiceAnimationActive} player={this.props.store.players[2]} stepValue={1} facing="right"/>
           </View>
         </View>
 
         <MenuBar style={styles.menuBar} navigator={this.props.navigator} store={this.props.store} onSetLifeTotal={this.onSetLifeTotal.bind(this)}/>
 
         <View style={styles.lowerContainer}>
-          <Counter min={0} player={this.props.store.players[0]} stepValue={1}/>
+          <Counter min={0} store={this.props.store} doRollDiceAnimation={this.props.store.isRollingDiceAnimationActive} player={this.props.store.players[0]} stepValue={1}/>
         </View>
       </View>
     )

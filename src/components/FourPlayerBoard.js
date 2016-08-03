@@ -43,11 +43,11 @@ export default class FourPlayerBoard extends Component {
 
         <View style={styles.upperContainer}>
           <View style={styles.cardContainer}>
-            <Counter min={0} player={this.props.store.players[2]} stepValue={1} facing="left"/>
+            <Counter min={0} store={this.props.store} doRollDiceAnimation={this.props.store.isRollingDiceAnimationActive} player={this.props.store.players[2]} stepValue={1} facing="left"/>
           </View>
 
           <View style={styles.cardContainer}>
-            <Counter min={0} player={this.props.store.players[3]} stepValue={1} facing="right"/>
+            <Counter min={0} store={this.props.store} doRollDiceAnimation={this.props.store.isRollingDiceAnimationActive} player={this.props.store.players[3]} stepValue={1} facing="right"/>
           </View>
         </View>
 
@@ -55,11 +55,11 @@ export default class FourPlayerBoard extends Component {
 
         <View style={styles.lowerContainer}>
           <View style={styles.cardContainer}>
-            <Counter min={0} player={this.props.store.players[0]} stepValue={1} facing="left"/>
+            <Counter min={0} store={this.props.store} doRollDiceAnimation={this.props.store.isRollingDiceAnimationActive} player={this.props.store.players[0]} stepValue={1} facing="left"/>
           </View>
 
           <View style={styles.cardContainer}>
-            <Counter min={0} player={this.props.store.players[1]} stepValue={1} facing="right"/>
+            <Counter min={0} store={this.props.store} doRollDiceAnimation={this.props.store.isRollingDiceAnimationActive} player={this.props.store.players[1]} stepValue={1} facing="right"/>
           </View>
         </View>
       </View>
