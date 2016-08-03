@@ -101,7 +101,11 @@ export default class Counter extends Component {
       _this.setState({roll: this.props.player.roll, isWinner: _this.props.player.winner})
       _this.props.store.isRollingDiceAnimationActive = false
       _this.tickTockSound.stop()
-      _this.tadaSound.play()
+
+      if (_this.props.player.winner) {
+        setTimeout(() => _this.tadaSound.play(), 300)
+        _this.refs.diceView.tada(1600)
+      }
     }, 2000)
   }
 
@@ -319,14 +323,14 @@ export default class Counter extends Component {
         <View
           style={[styles.blurContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
           <BlurView blurType="light" style={[styles.blur]}>
-            <View
+            <Animatable.View ref="diceView"
               style={[styles.blurContentContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
               <Image
                 style={[styles.diceImage]}
                 source={diceIcon}
               />
               {this.state.isWinner ? <Text style={styles.diceWinnerText}>Winner!</Text> : null}
-            </View>
+            </Animatable.View>
           </BlurView>
         </View>
         </TouchableWithoutFeedback> : null
