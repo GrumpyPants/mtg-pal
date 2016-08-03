@@ -53,7 +53,25 @@ export default class Counter extends Component {
         console.log('duration in seconds: ' + this.clickSound.getDuration() +
           'number of channels: ' + this.clickSound.getNumberOfChannels());
       }
-    });
+    })
+
+    this.tickTockSound = new Sound('tickTock.mp3', Sound.MAIN_BUNDLE, (error) => {
+      if (error) {
+        console.log('failed to load the sound', error);
+      } else { // loaded successfully
+        console.log('duration in seconds: ' + this.tickTockSound.getDuration() +
+          'number of channels: ' + this.tickTockSound.getNumberOfChannels());
+      }
+    })
+
+    this.tadaSound = new Sound('tada.mp3', Sound.MAIN_BUNDLE, (error) => {
+      if (error) {
+        console.log('failed to load the sound', error);
+      } else { // loaded successfully
+        console.log('duration in seconds: ' + this.tadaSound.getDuration() +
+          'number of channels: ' + this.tadaSound.getNumberOfChannels());
+      }
+    })
 
     this.state = {
      value: this.props.initialValue,
@@ -72,6 +90,8 @@ export default class Counter extends Component {
     const _this = this
     this.setState({isWinner: false})
 
+    this.tickTockSound.play()
+
     const intervalID = window.setInterval(() => {
       _this.setState({roll: Math.floor(Math.random() * 6) + 1})
     }, 200)
@@ -80,6 +100,8 @@ export default class Counter extends Component {
       window.clearInterval(intervalID)
       _this.setState({roll: this.props.player.roll, isWinner: _this.props.player.winner})
       _this.props.store.isRollingDiceAnimationActive = false
+      _this.tickTockSound.stop()
+      _this.tadaSound.play()
     }, 2000)
   }
 

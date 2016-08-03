@@ -27,6 +27,8 @@
 		6359A9601D518D5000548B5F /* libRNOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6359A95E1D518D2D00548B5F /* libRNOverlay.a */; };
 		6359A9931D52087500548B5F /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6359A9921D52084400548B5F /* libRNSound.a */; };
 		6359A9951D520E4500548B5F /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6359A9941D520E4500548B5F /* click.wav */; };
+		6359A99C1D5212F700548B5F /* tada.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6359A99A1D5212F700548B5F /* tada.mp3 */; };
+		6359A99D1D5212F700548B5F /* tickTock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6359A99B1D5212F700548B5F /* tickTock.mp3 */; };
 		637C06631D20835F00FB06D7 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 637C06621D20835F00FB06D7 /* FontAwesome.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		851BF7DC5736491A928823D7 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15A289F1BAC44938A59072EA /* Entypo.ttf */; };
@@ -184,6 +186,8 @@
 		6359A94E1D518D2D00548B5F /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "../node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
 		6359A98D1D52084400548B5F /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
 		6359A9941D520E4500548B5F /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
+		6359A99A1D5212F700548B5F /* tada.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tada.mp3; sourceTree = "<group>"; };
+		6359A99B1D5212F700548B5F /* tickTock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tickTock.mp3; sourceTree = "<group>"; };
 		637C06621D20835F00FB06D7 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		6954B8FE102042179F6F51D1 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -327,6 +331,8 @@
 		26D61B00000A4B40A771151F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6359A99A1D5212F700548B5F /* tada.mp3 */,
+				6359A99B1D5212F700548B5F /* tickTock.mp3 */,
 				6359A9941D520E4500548B5F /* click.wav */,
 				15A289F1BAC44938A59072EA /* Entypo.ttf */,
 				01CA93C4CEA041448C5ABC4C /* EvilIcons.ttf */,
@@ -696,8 +702,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6359A99D1D5212F700548B5F /* tickTock.mp3 in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				637C06631D20835F00FB06D7 /* FontAwesome.ttf in Resources */,
+				6359A99C1D5212F700548B5F /* tada.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				6359A9951D520E4500548B5F /* click.wav in Resources */,
 				851BF7DC5736491A928823D7 /* Entypo.ttf in Resources */,
