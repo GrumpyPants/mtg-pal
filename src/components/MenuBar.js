@@ -37,10 +37,17 @@ export default class MenuBar extends Component {
   }
 
   onChangeBackgroundPressed () {
-    this.props.store.isBackgroundColorViewVisible = !this.props.store.isBackgroundColorViewVisible
+    const playersWithBGViewVisible = this.props.store.players.filter((player) => player.isBackgroundColorViewVisible)
+    if (playersWithBGViewVisible.length === 0) {
+      this.props.store.setAllBackgroundColorViews(true)
+    }
+    else {
+      this.props.store.setAllBackgroundColorViews(false)
+    }
   }
 
   transitionMenu (menuType) {
+    this.props.store.setAllBackgroundColorViews(false)
     this.props.store.isRollingDiceViewVisible = false
     this.props.store.clearDiceRoll()
     const menuBar = this.refs.menuBar
@@ -54,6 +61,7 @@ export default class MenuBar extends Component {
   }
 
   onDiceRollPressed () {
+    this.props.store.setAllBackgroundColorViews(false)
     this.props.store.rollDice()
   }
 
@@ -67,6 +75,7 @@ export default class MenuBar extends Component {
   }
 
   onResetPressed () {
+    this.props.store.setAllBackgroundColorViews(false)
     this.props.store.isRollingDiceViewVisible = false
     this.props.store.clearDiceRoll()
     this.props.store.resetLifeTotals()

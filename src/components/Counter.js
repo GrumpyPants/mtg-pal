@@ -346,7 +346,7 @@ export default class Counter extends Component {
       }
 
       {
-        this.props.store.isBackgroundColorViewVisible ?
+        this.props.player.isBackgroundColorViewVisible ?
           <TouchableWithoutFeedback>
             <BlurView blurType="light" style={[styles.bgColorContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
             <View style={[styles.bgColorContentContainer]}>

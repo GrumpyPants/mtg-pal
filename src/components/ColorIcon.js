@@ -25,6 +25,7 @@ export default class ColorIcon extends Component {
 
   changeBackgroundColor () {
     this.props.player.bgColor = this.props.color
+    this.props.player.isBackgroundColorViewVisible = false
   }
 
   render () {
