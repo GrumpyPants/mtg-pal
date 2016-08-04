@@ -4,11 +4,13 @@ import droll from 'droll'
 let index = 0
 
 class MTGHelperStore {
-  @observable players = [{name: 'Player 1', life: 20, roll: null}, {name: 'Player 2', life: 20, roll: null}]
+  @observable players = [{name: 'Player 1', life: 20, roll: null, bgColor: 'deepskyblue'},
+                         {name: 'Player 2', life: 20, roll: null, bgColor: 'deepskyblue'}]
   @observable lifeTotal = 20
 
   @observable isRollingDiceViewVisible = false
   @observable isRollingDiceAnimationActive = false
+  @observable isBackgroundColorViewVisible = false
 
   setNumPlayers (numPlayers) {
     if (numPlayers === this.players.length) return
@@ -24,6 +26,7 @@ class MTGHelperStore {
         newPlayers.push({
           name: 'Player ' + playerNum,
           life: 20,
+          bgColor: 'deepskyblue'
         })
       }
       this.players = this.players.concat(newPlayers)

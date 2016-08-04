@@ -20,6 +20,7 @@ import {observer} from 'mobx-react/native'
 import {BlurView} from 'react-native-blur';
 
 import CounterNumber from './CounterNumber'
+import ColorIcon from './ColorIcon'
 import PlayerName from './PlayerName'
 import Sound from 'react-native-sound'
 
@@ -141,7 +142,7 @@ export default class Counter extends Component {
   }
 
   getDecrementHalf () {
-    const touchableOpacityStyle = {}
+    const touchableOpacityStyle = {backgroundColor: this.props.player.bgColor}
     const minusIconStyle = {}
     switch(this.props.facing) {
       case 'left':
@@ -181,7 +182,7 @@ export default class Counter extends Component {
   }
 
   getIncrementHalf () {
-    const touchableOpacityStyle = {}
+    const touchableOpacityStyle = {backgroundColor: this.props.player.bgColor}
     const plusIconStyle = {}
     switch(this.props.facing) {
       case 'left':
@@ -344,6 +345,23 @@ export default class Counter extends Component {
         </TouchableWithoutFeedback> : null
       }
 
+      {
+        this.props.store.isBackgroundColorViewVisible ?
+          <TouchableWithoutFeedback>
+            <BlurView blurType="light" style={[styles.bgColorContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
+            <View style={[styles.bgColorContentContainer]}>
+              <ColorIcon color='deepskyblue' store={this.props.store} player={this.props.player}/>
+              <ColorIcon color='steelblue' store={this.props.store} player={this.props.player}/>
+              <ColorIcon color='aqua' store={this.props.store} player={this.props.player}/>
+              <ColorIcon color='slategrey' store={this.props.store} player={this.props.player}/>
+              <ColorIcon color='seagreen' store={this.props.store} player={this.props.player}/>
+              <ColorIcon color='orangered' store={this.props.store} player={this.props.player}/>
+              <ColorIcon color='deeppink' store={this.props.store} player={this.props.player}/>
+              <ColorIcon color='mintcream' store={this.props.store} player={this.props.player}/>
+            </View>
+            </BlurView>
+          </TouchableWithoutFeedback> : null
+      }
     </View>
     )
   }
@@ -352,9 +370,9 @@ export default class Counter extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     borderRadius: 30,
-    margin: 2,
+    //margin: 2,
     backgroundColor:'transparent',
   },
   facingUp: {
@@ -377,7 +395,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   touchableOpacityContainer: {
-    backgroundColor: 'deepskyblue',
+    //backgroundColor: 'deepskyblue',
     flex: 1,
   },
   number: {
@@ -405,5 +423,20 @@ const styles = StyleSheet.create({
   diceWinnerText: {
     marginTop: 10,
     fontSize: 18
+  },
+  bgColorContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    borderRadius: 30,
+    //backgroundColor: 'gray'
+  },
+  bgColorContentContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 })

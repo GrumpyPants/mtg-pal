@@ -11,7 +11,6 @@ import {
 import TwoPlayerBoard from './TwoPlayerBoard'
 import ThreePlayerBoard from './ThreePlayerBoard'
 import FourPlayerBoard from './FourPlayerBoard'
-import Settings from './Settings'
 import MTGHelperStore from '../store/MTGHelperStore'
 
 class App extends Component {
@@ -26,8 +25,6 @@ class App extends Component {
 
   renderScene (route, navigator) {
     switch (route.id) {
-      case 'settings':
-        return <Settings navigator={navigator} />
       case '2Players':
         return (
           <TwoPlayerBoard

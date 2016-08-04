@@ -15,8 +15,6 @@ import {
 
 import * as Animatable from 'react-native-animatable';
 
-import Settings from './Settings'
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class MenuBar extends Component {
@@ -38,13 +36,8 @@ export default class MenuBar extends Component {
     }
   }
 
-  onSettingsPressed () {
-    console.log('TODO: open settings')
-    this.props.navigator.push({
-      name: 'Settings',
-      id: 'settings',
-      component: Settings
-    });
+  onChangeBackgroundPressed () {
+    this.props.store.isBackgroundColorViewVisible = !this.props.store.isBackgroundColorViewVisible
   }
 
   transitionMenu (menuType) {
@@ -210,11 +203,20 @@ export default class MenuBar extends Component {
   }
 
   getMenuView () {
-    const settingsIcon = (<Icon name="cog" size={30} color="white" onPress={this.onSettingsPressed.bind(this)}/>)
+    //const paintCanIcon = (<Icon name="cog" size={30} color="white" onPress={this.onChangeBackgroundPressed.bind(this)}/>)
     const numPlayersIcon = (<Icon name="users" size={30} color="white" onPress={this.transitionMenu.bind(this, 'playersMenu')}/>)
     const resetIcon = (<Icon name="refresh" size={30} color="white" onPress={this.onResetPressed.bind(this)}/>)
 
     const lifeIcon = this.getLifeIcon(this.props.store.lifeTotal)
+
+    const paintCanIcon = (
+      <TouchableHighlight onPress={this.onChangeBackgroundPressed.bind(this)}>
+        <Image
+          style={styles.button}
+          source={require('../img/paintCan.png')}
+        />
+      </TouchableHighlight>
+    )
 
     const rollDiceIcon = (
       <TouchableHighlight onPress={this.onDiceRollPressed.bind(this)}>
@@ -234,7 +236,7 @@ export default class MenuBar extends Component {
       default:
         return (
           <Animatable.View ref='menuBar' style={styles.container}>
-            {settingsIcon}
+            {paintCanIcon}
             {numPlayersIcon}
             {lifeIcon}
             {rollDiceIcon}
