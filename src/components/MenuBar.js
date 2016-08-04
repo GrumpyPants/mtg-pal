@@ -48,6 +48,8 @@ export default class MenuBar extends Component {
   }
 
   transitionMenu (menuType) {
+    this.props.store.isRollingDiceViewVisible = false
+    this.props.store.clearDiceRoll()
     const menuBar = this.refs.menuBar
     const _this = this
 
@@ -72,6 +74,8 @@ export default class MenuBar extends Component {
   }
 
   onResetPressed () {
+    this.props.store.isRollingDiceViewVisible = false
+    this.props.store.clearDiceRoll()
     this.props.store.resetLifeTotals()
   }
 
