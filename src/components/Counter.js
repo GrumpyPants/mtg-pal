@@ -103,7 +103,7 @@ export default class Counter extends Component {
       _this.tickTockSound.stop()
 
       if (_this.props.player.winner) {
-        setTimeout(() => _this.tadaSound.play(), 300)
+        //setTimeout(() => _this.tadaSound.play(), 300)
         _this.refs.diceView.tada(1600)
       }
     }, 2000)
@@ -237,15 +237,19 @@ export default class Counter extends Component {
     }
 
     let counterDirection = {}
+    let diceContainerStyle = {}
     const facing = this.props.facing
     if (facing) {
       if (facing === 'up') {
         counterDirection = styles.facingUp
+        diceContainerStyle.transform = [{rotate: '180deg'}]
       }
       else if (facing === 'left') {
         counterDirection = styles.facingLeft
+        diceContainerStyle.transform = [{rotate: '90deg'}]
       }
       else if (facing === 'right') {
+        diceContainerStyle.transform = [{rotate: '270deg'}]
         counterDirection = styles.facingRight
       }
     }
@@ -318,21 +322,25 @@ export default class Counter extends Component {
                     playerName={this.props.player.name}
                     onLayoutChange={this.updatePlayerNameMargins.bind(this)}/>
       </View>
-      { this.props.store.isRollingDiceViewVisible ?
+
+      {
+        this.props.store.isRollingDiceViewVisible ?
         <TouchableWithoutFeedback onPress={this.handleRollViewPressed.bind(this)}>
-        <View
-          style={[styles.blurContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
-          <BlurView blurType="light" style={[styles.blur]}>
-            <Animatable.View ref="diceView"
-              style={[styles.blurContentContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
-              <Image
-                style={[styles.diceImage]}
-                source={diceIcon}
-              />
-              {this.state.isWinner ? <Text style={styles.diceWinnerText}>Winner!</Text> : null}
-            </Animatable.View>
-          </BlurView>
-        </View>
+          <View
+            style={[styles.blurContainer]}>
+            <BlurView blurType="light" style={[{width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
+            <View style={[diceContainerStyle, styles.blurContentContainer]}>
+              <Animatable.View ref="diceView"
+                style={[styles.blurContentContainer]}>
+                <Image
+                  style={[styles.diceImage]}
+                  source={diceIcon}
+                />
+                {this.state.isWinner ? <Text style={styles.diceWinnerText}>Winner!</Text> : null}
+              </Animatable.View>
+              </View>
+            </BlurView>
+          </View>
         </TouchableWithoutFeedback> : null
       }
 
