@@ -29,6 +29,7 @@
 		6359A9951D520E4500548B5F /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6359A9941D520E4500548B5F /* click.wav */; };
 		6359A99C1D5212F700548B5F /* tada.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6359A99A1D5212F700548B5F /* tada.mp3 */; };
 		6359A99D1D5212F700548B5F /* tickTock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6359A99B1D5212F700548B5F /* tickTock.mp3 */; };
+		6359A9B51D52F6F200548B5F /* libRNShakeEvent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6359A9A31D52F65200548B5F /* libRNShakeEvent.a */; };
 		637C06631D20835F00FB06D7 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 637C06621D20835F00FB06D7 /* FontAwesome.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		851BF7DC5736491A928823D7 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15A289F1BAC44938A59072EA /* Entypo.ttf */; };
@@ -126,6 +127,13 @@
 			remoteGlobalIDString = 19825A1E1BD4A89800EE0337;
 			remoteInfo = RNSound;
 		};
+		6359A9A21D52F65200548B5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6359A99E1D52F65100548B5F /* RNShakeEvent.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNShakeEvent;
+		};
 		637C063B1D1EE37E00FB06D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 59FF81E0F95E463F977970C0 /* BVLinearGradient.xcodeproj */;
@@ -188,6 +196,7 @@
 		6359A9941D520E4500548B5F /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
 		6359A99A1D5212F700548B5F /* tada.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tada.mp3; sourceTree = "<group>"; };
 		6359A99B1D5212F700548B5F /* tickTock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tickTock.mp3; sourceTree = "<group>"; };
+		6359A99E1D52F65100548B5F /* RNShakeEvent.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNShakeEvent.xcodeproj; path = "../node_modules/react-native-shake-event-ios/RNShakeEvent.xcodeproj"; sourceTree = "<group>"; };
 		637C06621D20835F00FB06D7 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		6954B8FE102042179F6F51D1 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -212,6 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6359A9B51D52F6F200548B5F /* libRNShakeEvent.a in Frameworks */,
 				6359A9931D52087500548B5F /* libRNSound.a in Frameworks */,
 				6359A9601D518D5000548B5F /* libRNOverlay.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -370,6 +380,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6359A99F1D52F65100548B5F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6359A9A31D52F65200548B5F /* libRNShakeEvent.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		637C06381D1EE37E00FB06D7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +415,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6359A99E1D52F65100548B5F /* RNShakeEvent.xcodeproj */,
 				6359A98D1D52084400548B5F /* RNSound.xcodeproj */,
 				6359A94E1D518D2D00548B5F /* RNOverlay.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -566,6 +585,10 @@
 					ProjectRef = 6359A94E1D518D2D00548B5F /* RNOverlay.xcodeproj */;
 				},
 				{
+					ProductGroup = 6359A99F1D52F65100548B5F /* Products */;
+					ProjectRef = 6359A99E1D52F65100548B5F /* RNShakeEvent.xcodeproj */;
+				},
+				{
 					ProductGroup = 6359A98E1D52084400548B5F /* Products */;
 					ProjectRef = 6359A98D1D52084400548B5F /* RNSound.xcodeproj */;
 				},
@@ -658,6 +681,13 @@
 			fileType = archive.ar;
 			path = libRNSound.a;
 			remoteRef = 6359A9911D52084400548B5F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6359A9A31D52F65200548B5F /* libRNShakeEvent.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNShakeEvent.a;
+			remoteRef = 6359A9A21D52F65200548B5F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		637C063C1D1EE37E00FB06D7 /* libBVLinearGradient.a */ = {

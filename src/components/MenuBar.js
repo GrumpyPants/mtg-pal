@@ -13,9 +13,9 @@ import {
   TouchableHighlight,
 } from 'react-native'
 
-import * as Animatable from 'react-native-animatable';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Animatable from 'react-native-animatable'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import RNShakeEventIOS from 'react-native-shake-event-ios';
 
 export default class MenuBar extends Component {
 
@@ -33,6 +33,20 @@ export default class MenuBar extends Component {
     this.state = {
       showLifeMenu: false,
       showNumPlayersMenu: false,
+    }
+  }
+
+  componentWillMount() {
+    if(Platform.OS === 'ios') {
+      RNShakeEventIOS.addEventListener('shake', () => {
+        this.onDiceRollPressed()
+      })
+    }
+  }
+
+  componentWillUnmount() {
+    if(Platform.OS === 'ios') {
+      RNShakeEventIOS.removeEventListener('shake')
     }
   }
 
