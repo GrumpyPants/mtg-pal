@@ -156,7 +156,7 @@ export default class MenuBar extends Component {
     }
     else {
       this.props.store.setNumPlayers(numPlayers)
-      this.props.navigator.replace({id:numPlayers + 'Players', store: this.props.store})
+      this.props.navigator.immediatelyResetRouteStack([{id:numPlayers + 'Players', store: this.props.store, reset: true }])
     }
   }
 
@@ -226,7 +226,6 @@ export default class MenuBar extends Component {
   }
 
   getMenuView () {
-    //const paintCanIcon = (<Icon name="cog" size={30} color="white" onPress={this.onChangeBackgroundPressed.bind(this)}/>)
     const numPlayersIcon = (<Icon name="users" size={30} color="white" onPress={this.transitionMenu.bind(this, 'playersMenu')}/>)
     const resetIcon = (<Icon name="refresh" size={30} color="white" onPress={this.onResetPressed.bind(this)}/>)
 

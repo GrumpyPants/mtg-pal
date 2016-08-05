@@ -1,5 +1,6 @@
 import {observable} from 'mobx'
 import droll from 'droll'
+import Sound from 'react-native-sound'
 
 let index = 0
 
@@ -10,6 +11,26 @@ class MTGHelperStore {
 
   @observable isRollingDiceViewVisible = false
   @observable isRollingDiceAnimationActive = false
+  playingSound = false
+
+  constructor () {
+    this.tickTockSound = new Sound('tickTock.mp3', Sound.MAIN_BUNDLE)
+  }
+
+  playTickTockSound () {
+    if (!this.playingSound) {
+      this.playingSound = true
+      this.tickTockSound.play()
+    }
+  }
+
+  stopTickTockSound () {
+    if (this.playingSound) {
+      this.tickTockSound.stop()
+      this.playingSound = false
+    }
+
+  }
 
   setNumPlayers (numPlayers) {
     if (numPlayers === this.players.length) return

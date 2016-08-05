@@ -65,7 +65,7 @@ class App extends Component {
 
   render () {
     return (
-      <Navigator initialRoute={{
+      <Navigator ref="navigator" initialRoute={{
                    name: 'Counter Screen',
                    index: 0,
                    passProps: {
@@ -73,6 +73,8 @@ class App extends Component {
                    }
                  }}
                  renderScene={this.renderScene.bind(this)}
+                 configureScene={(route, routeStack) =>{
+                  return Navigator.SceneConfigs.FloatFromBottom}}
       />
     )
   }

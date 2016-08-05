@@ -56,15 +56,6 @@ export default class Counter extends Component {
       }
     })
 
-    this.tickTockSound = new Sound('tickTock.mp3', Sound.MAIN_BUNDLE, (error) => {
-      if (error) {
-        console.log('failed to load the sound', error);
-      } else { // loaded successfully
-        console.log('duration in seconds: ' + this.tickTockSound.getDuration() +
-          'number of channels: ' + this.tickTockSound.getNumberOfChannels());
-      }
-    })
-
     this.tadaSound = new Sound('tada.mp3', Sound.MAIN_BUNDLE, (error) => {
       if (error) {
         console.log('failed to load the sound', error);
@@ -91,8 +82,7 @@ export default class Counter extends Component {
     const _this = this
     this.setState({isWinner: false})
 
-    this.tickTockSound.play()
-
+    this.props.store.playTickTockSound()
     const intervalID = window.setInterval(() => {
       _this.setState({roll: Math.floor(Math.random() * 6) + 1})
     }, 200)
@@ -101,10 +91,8 @@ export default class Counter extends Component {
       window.clearInterval(intervalID)
       _this.setState({roll: this.props.player.roll, isWinner: _this.props.player.winner})
       _this.props.store.isRollingDiceAnimationActive = false
-      _this.tickTockSound.stop()
-
+      _this.props.store.stopTickTockSound()
       if (_this.props.player.winner) {
-        //setTimeout(() => _this.tadaSound.play(), 300)
         _this.refs.diceView.tada(1600)
       }
     }, 2000)
@@ -429,7 +417,6 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     borderRadius: 30,
-    //backgroundColor: 'gray'
   },
   bgColorContentContainer: {
     flex: 1,
