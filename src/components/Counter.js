@@ -102,14 +102,15 @@ export default class Counter extends Component {
     this.setState({dimensions: event.nativeEvent.layout})
   }
 
-  onDecrementPressDownHandler () {
+  onDecrementPressDownHandler (decrementValue = 1) {
     this.clickSound.play()
-    this.props.player.life--
+    const life = this.props.player.life - decrementValue
+    this.props.player.life = life
   }
 
-  onIncrementPressDownHandler () {
+  onIncrementPressDownHandler (incrementValue = 1) {
     this.clickSound.play()
-    this.props.player.life++
+    this.props.player.life = this.props.player.life  + incrementValue
   }
 
   onPressOutHandler () {
@@ -161,11 +162,15 @@ export default class Counter extends Component {
     }
 
     return (
-      <TouchableOpacity onPress={this.onDecrementPressDownHandler.bind(this)}
+      <TouchableHighlight onPressIn={this.onDecrementPressDownHandler.bind(this, 1)}
+                        delayPressIn={0}
+                        delayPressOut={0}
+                        underlayColor="darkslategrey"
                         onPressOut={this.onPressOutHandler.bind(this)}
+                        onLongPress={this.onDecrementPressDownHandler.bind(this, 5)}
                         style={[styles.touchableOpacityContainer, touchableOpacityStyle]}>
         <Image source={require('../img/subtract.png')} style={[styles.minusIcon, minusIconStyle]}/>
-      </TouchableOpacity>
+      </TouchableHighlight>
     )
   }
 
@@ -199,11 +204,15 @@ export default class Counter extends Component {
     }
 
     return (
-      <TouchableOpacity onPress={this.onIncrementPressDownHandler.bind(this)}
-                        onPressOut={this.onPressOutHandler.bind(this)}
-                        style={[styles.touchableOpacityContainer, touchableOpacityStyle]}>
+      <TouchableHighlight onPressIn={this.onIncrementPressDownHandler.bind(this, 1)}
+                          delayPressIn={0}
+                          delayPressOut={0}
+                          underlayColor="darkslategrey"
+                          onPressOut={this.onPressOutHandler.bind(this)}
+                          onLongPress={this.onIncrementPressDownHandler.bind(this, 5)}
+                          style={[styles.touchableOpacityContainer, touchableOpacityStyle]}>
         <Image source={require('../img/add.png')} style={[styles.plusIcon, plusIconStyle]}/>
-      </TouchableOpacity>
+      </TouchableHighlight>
     )
   }
 

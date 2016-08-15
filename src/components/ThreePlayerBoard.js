@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   upperContainer: {
-    flex: 2,
+    flex: 1.8,
     flexDirection: 'row',
     borderWidth: 1,
   },
