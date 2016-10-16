@@ -5,8 +5,8 @@ import Sound from 'react-native-sound'
 let index = 0
 
 class MTGHelperStore {
-  @observable players = [{name: 'Player 1', life: 20, roll: null, bgColor: 'deepskyblue', isBackgroundColorViewVisible: false},
-                         {name: 'Player 2', life: 20, roll: null, bgColor: 'deepskyblue', isBackgroundColorViewVisible: false}]
+  @observable players = [{name: 'Player 1', life: 20, roll: null, bgColor: 'seagreen', isBackgroundColorViewVisible: false},
+                         {name: 'Player 2', life: 20, roll: null, bgColor: 'orangered', isBackgroundColorViewVisible: false}]
   @observable lifeTotal = 20
 
   @observable isRollingDiceViewVisible = false
@@ -15,6 +15,7 @@ class MTGHelperStore {
 
   constructor () {
     this.tickTockSound = new Sound('tickTock.mp3', Sound.MAIN_BUNDLE)
+    this.tadaSound = new Sound('tada.mp3', Sound.MAIN_BUNDLE)
   }
 
   playTickTockSound () {
@@ -27,9 +28,16 @@ class MTGHelperStore {
   stopTickTockSound () {
     if (this.playingSound) {
       this.tickTockSound.stop()
+      this.tadaSound.stop()
       this.playingSound = false
     }
+  }
 
+  playTadaSound () {
+    if (!this.playingSound) {
+      //this.playingSound = true
+      this.tadaSound.play()
+    }
   }
 
   setNumPlayers (numPlayers) {

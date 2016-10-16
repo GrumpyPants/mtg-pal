@@ -15,6 +15,8 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+const timer = require('react-native-timer');
+
 import * as Animatable from 'react-native-animatable'
 import {observer} from 'mobx-react/native'
 import {BlurView} from 'react-native-blur';
@@ -83,19 +85,21 @@ export default class Counter extends Component {
     this.setState({isWinner: false})
 
     this.props.store.playTickTockSound()
-    const intervalID = window.setInterval(() => {
-      _this.setState({roll: Math.floor(Math.random() * 6) + 1})
-    }, 200)
 
-    window.setTimeout(() => {
-      window.clearInterval(intervalID)
-      _this.setState({roll: this.props.player.roll, isWinner: _this.props.player.winner})
+    timer.setInterval(_this, 'diceRollInterval', () => {
+      _this.setState({roll: Math.floor(Math.random() * 6) + 1})
+    }, 200);
+
+    timer.setTimeout(_this, 'diceRollTimeout', () => {
+      timer.clearInterval(_this, 'diceRollInterval')
+      _this.setState({roll: _this.props.player.roll, isWinner: _this.props.player.winner})
       _this.props.store.isRollingDiceAnimationActive = false
       _this.props.store.stopTickTockSound()
       if (_this.props.player.winner) {
+        _this.props.store.playTadaSound()
         _this.refs.diceView.tada(1600)
       }
-    }, 2000)
+    }, 2000);
   }
 
   onLayout (event) {
@@ -108,12 +112,21 @@ export default class Counter extends Component {
     this.props.player.life = life
   }
 
+  onLongDecrementPressDownHandler (decrementValue = 5) {
+    timer.setInterval('decrement', this.onDecrementPressDownHandler.bind(this, decrementValue), 400);
+  }
+
   onIncrementPressDownHandler (incrementValue = 1) {
     this.clickSound.play()
     this.props.player.life = this.props.player.life  + incrementValue
   }
 
-  onPressOutHandler () {
+  onLongIncrementPressDownHandler (incrementValue = 5) {
+    timer.setInterval('increment', this.onIncrementPressDownHandler.bind(this, incrementValue), 400);
+  }
+
+  onPressOutHandler (intervalName) {
+    timer.clearInterval(intervalName);
   }
 
   updateNumberMargins (dimensions) {
@@ -162,12 +175,12 @@ export default class Counter extends Component {
     }
 
     return (
-      <TouchableHighlight onPressIn={this.onDecrementPressDownHandler.bind(this, 1)}
+      <TouchableHighlight onPress={this.onDecrementPressDownHandler.bind(this, 1)}
                         delayPressIn={0}
                         delayPressOut={0}
                         underlayColor="darkslategrey"
-                        onPressOut={this.onPressOutHandler.bind(this)}
-                        onLongPress={this.onDecrementPressDownHandler.bind(this, 5)}
+                        onPressOut={this.onPressOutHandler.bind(this, 'decrement')}
+                        onLongPress={this.onLongDecrementPressDownHandler.bind(this, 5)}
                         style={[styles.touchableOpacityContainer, touchableOpacityStyle]}>
         <Image source={require('../img/subtract.png')} style={[styles.minusIcon, minusIconStyle]}/>
       </TouchableHighlight>
@@ -204,12 +217,12 @@ export default class Counter extends Component {
     }
 
     return (
-      <TouchableHighlight onPressIn={this.onIncrementPressDownHandler.bind(this, 1)}
+      <TouchableHighlight onPress={this.onIncrementPressDownHandler.bind(this, 1)}
                           delayPressIn={0}
                           delayPressOut={0}
                           underlayColor="darkslategrey"
-                          onPressOut={this.onPressOutHandler.bind(this)}
-                          onLongPress={this.onIncrementPressDownHandler.bind(this, 5)}
+                          onPressOut={this.onPressOutHandler.bind(this, 'increment')}
+                          onLongPress={this.onLongIncrementPressDownHandler.bind(this, 5)}
                           style={[styles.touchableOpacityContainer, touchableOpacityStyle]}>
         <Image source={require('../img/add.png')} style={[styles.plusIcon, plusIconStyle]}/>
       </TouchableHighlight>
@@ -217,6 +230,10 @@ export default class Counter extends Component {
   }
 
   handleRollViewPressed () {
+    if (this.props.store.isRollingDiceAnimationActive) {
+      return
+    }
+
     this.props.store.isRollingDiceViewVisible = false
     this.setState({roll: null, isWinner: null})
   }

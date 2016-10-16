@@ -28,6 +28,8 @@ export default class MenuBar extends Component {
     showNumPlayersMenu: false,
   }
 
+  static hitSlop = {top: 20, left:20, bottom: 20, right: 20};
+
   constructor (props) {
     super(props)
     this.state = {
@@ -104,7 +106,7 @@ export default class MenuBar extends Component {
     const backIcon = (<Icon name="arrow-left" size={30} color="white" onPress={this.onBackToMainMenuPressed.bind(this, 'lifeMenu')}/>)
 
     const lifeIcon20 = (
-      <TouchableHighlight onPress={this.setLifeTotal.bind(this, 20)}>
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.setLifeTotal.bind(this, 20)}>
         <Image
           style={styles.button}
           source={require('../img/20-health.png')}
@@ -113,7 +115,7 @@ export default class MenuBar extends Component {
     )
 
     const lifeIcon30 = (
-      <TouchableHighlight onPress={this.setLifeTotal.bind(this, 30)}>
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.setLifeTotal.bind(this, 30)}>
         <Image
           style={styles.button}
           source={require('../img/30-health.png')}
@@ -122,7 +124,7 @@ export default class MenuBar extends Component {
     )
 
     const lifeIcon40 = (
-      <TouchableHighlight onPress={this.setLifeTotal.bind(this, 40)}>
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.setLifeTotal.bind(this, 40)}>
         <Image
           style={styles.button}
           source={require('../img/40-health.png')}
@@ -131,7 +133,7 @@ export default class MenuBar extends Component {
     )
 
     const lifeIcon50 = (
-      <TouchableHighlight onPress={this.setLifeTotal.bind(this, 50)}>
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.setLifeTotal.bind(this, 50)}>
         <Image
           style={styles.button}
           source={require('../img/50-health.png')}
@@ -162,8 +164,9 @@ export default class MenuBar extends Component {
 
   getPlayersMenu () {
     const backIcon = (<Icon name="arrow-left" size={30} color="white" onPress={this.onBackToMainMenuPressed.bind(this, 'playersMenu')}/>)
+
     const twoPlayerIcon = (
-      <TouchableHighlight onPress={this.onChangeNumPlayersPressed.bind(this, 2)}>
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.onChangeNumPlayersPressed.bind(this, 2)}>
         <Image
           style={styles.button}
           source={require('../img/2Players.png')}
@@ -172,7 +175,7 @@ export default class MenuBar extends Component {
     )
 
     const threePlayerIcon = (
-      <TouchableHighlight onPress={this.onChangeNumPlayersPressed.bind(this, 3)}>
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.onChangeNumPlayersPressed.bind(this, 3)}>
         <Image
           style={styles.button}
           source={require('../img/3Players.png')}
@@ -181,7 +184,7 @@ export default class MenuBar extends Component {
     )
 
     const fourPlayerIcon = (
-      <TouchableHighlight onPress={this.onChangeNumPlayersPressed.bind(this, 4)}>
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.onChangeNumPlayersPressed.bind(this, 4)}>
         <Image
           style={styles.button}
           source={require('../img/4Players.png')}
@@ -216,7 +219,7 @@ export default class MenuBar extends Component {
     }
 
     return (
-      <TouchableHighlight onPress={this.transitionMenu.bind(this, 'lifeMenu')}>
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.transitionMenu.bind(this, 'lifeMenu')}>
         <Image
           style={styles.button}
           source={icon}
@@ -226,13 +229,28 @@ export default class MenuBar extends Component {
   }
 
   getMenuView () {
-    const numPlayersIcon = (<Icon name="users" size={30} color="white" onPress={this.transitionMenu.bind(this, 'playersMenu')}/>)
-    const resetIcon = (<Icon name="refresh" size={30} color="white" onPress={this.onResetPressed.bind(this)}/>)
+    const resetIcon = (
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.onResetPressed.bind(this)}>
+        <Image
+          style={styles.button}
+          source={require('../img/refresh.png')}
+        />
+      </TouchableHighlight>
+    )
 
     const lifeIcon = this.getLifeIcon(this.props.store.lifeTotal)
 
+    const numPlayersIcon = (
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.transitionMenu.bind(this, 'playersMenu')}>
+        <Image
+          style={styles.button}
+          source={require('../img/users.png')}
+        />
+      </TouchableHighlight>
+    )
+
     const paintCanIcon = (
-      <TouchableHighlight onPress={this.onChangeBackgroundPressed.bind(this)}>
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.onChangeBackgroundPressed.bind(this)}>
         <Image
           style={styles.button}
           source={require('../img/paintCan.png')}
@@ -241,14 +259,13 @@ export default class MenuBar extends Component {
     )
 
     const rollDiceIcon = (
-      <TouchableHighlight onPress={this.onDiceRollPressed.bind(this)}>
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.onDiceRollPressed.bind(this)}>
         <Image
           style={styles.button}
           source={require('../img/dice5.png')}
         />
       </TouchableHighlight>
     )
-
 
     switch (this.state.menuType) {
       case 'lifeMenu':
