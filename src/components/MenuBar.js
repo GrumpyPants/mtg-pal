@@ -14,7 +14,6 @@ import {
 } from 'react-native'
 
 import * as Animatable from 'react-native-animatable'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import RNShakeEventIOS from 'react-native-shake-event-ios';
 
 export default class MenuBar extends Component {
@@ -103,7 +102,14 @@ export default class MenuBar extends Component {
   }
 
   getLifeTotalMenu () {
-    const backIcon = (<Icon name="arrow-left" size={30} color="white" onPress={this.onBackToMainMenuPressed.bind(this, 'lifeMenu')}/>)
+    const backIcon = (
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.onBackToMainMenuPressed.bind(this, 'lifeMenu')}>
+        <Image
+          style={styles.button}
+          source={require('../img/arrow-left.png')}
+        />
+      </TouchableHighlight>
+    )
 
     const lifeIcon20 = (
       <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.setLifeTotal.bind(this, 20)}>
@@ -163,7 +169,14 @@ export default class MenuBar extends Component {
   }
 
   getPlayersMenu () {
-    const backIcon = (<Icon name="arrow-left" size={30} color="white" onPress={this.onBackToMainMenuPressed.bind(this, 'playersMenu')}/>)
+    const backIcon = (
+      <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.onBackToMainMenuPressed.bind(this, 'playersMenu')}>
+        <Image
+          style={styles.button}
+          source={require('../img/arrow-left.png')}
+        />
+      </TouchableHighlight>
+    )
 
     const twoPlayerIcon = (
       <TouchableHighlight hitSlop={MenuBar.hitSlop} onPress={this.onChangeNumPlayersPressed.bind(this, 2)}>
