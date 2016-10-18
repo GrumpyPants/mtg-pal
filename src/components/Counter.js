@@ -95,7 +95,7 @@ export default class Counter extends Component {
       _this.setState({roll: _this.props.player.roll, isWinner: _this.props.player.winner})
       _this.props.store.isRollingDiceAnimationActive = false
       _this.props.store.stopTickTockSound()
-      if (_this.props.player.winner) {
+      if (_this.props.player.winner && _this.props.store.isRollingDiceViewVisible) {
         _this.props.store.playTadaSound()
         _this.refs.diceView.tada(1600)
       }
