@@ -13,6 +13,7 @@ import {
   View,
   PanResponder,
   TouchableOpacity,
+  findNodeHandle
 } from 'react-native'
 
 const timer = require('react-native-timer');
@@ -78,6 +79,12 @@ export default class Counter extends Component {
     if (newProps.doRollDiceAnimation) {
       this.doDiceRollAnimation()
     }
+  }
+
+  componentDidUpdate (preProps, prevState) {
+    //if (this.refs.backgroundImage) {
+    //  this.setState({viewRef: findNodeHandle(this.refs.backgroundImage)})
+    //}
   }
 
   doDiceRollAnimation () {
@@ -238,6 +245,112 @@ export default class Counter extends Component {
     this.setState({roll: null, isWinner: null})
   }
 
+  getIOSDiceBlurView() {
+    return (
+      <TouchableWithoutFeedback onPress={this.handleRollViewPressed.bind(this)}>
+        <View
+          style={[styles.blurContainer]}>
+          <BlurView blurType="light" style={[{width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
+            <View style={[diceContainerStyle, styles.blurContentContainer]}>
+              <Animatable.View ref="diceView"
+                               style={[styles.blurContentContainer]}>
+                <Image
+                  style={[styles.diceImage]}
+                  source={diceIcon}
+                />
+                {this.state.isWinner ? <Text style={styles.diceWinnerText}>Winner!</Text> : null}
+              </Animatable.View>
+            </View>
+          </BlurView>
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  }
+
+  imageLoaded() {
+    this.setState({viewRef: findNodeHandle(this.refs.backgroundImage)})
+  }
+
+  getAndroidBlurView () {
+    const _this = this
+    setTimeout(() => {
+      _this.setState({viewRef: findNodeHandle(_this.refs.backgroundImage)})
+    }, 1)
+
+    return (
+      <TouchableWithoutFeedback>
+        <View style={[styles.bgColorContentContainer, styles.bgColorContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}
+              onLayout={this.imageLoaded.bind(this)}
+        >
+
+          <Image
+            source={require('../img/grayBackground.png')}
+            style={[styles.bgColorContentContainer, styles.bgColorContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}
+            ref={'backgroundImage'}
+            onLoadEnd={this.imageLoaded.bind(this)}
+          >
+            <BlurView
+              blurRadius={10}
+              downsampleFactor={5}
+              overlayColor={'rgba(255, 255, 255, 0.1)'}
+              viewRef={this.state.viewRef}/>
+          </Image>
+
+          <ColorIcon color='deepskyblue' store={this.props.store} player={this.props.player}/>
+          <ColorIcon color='steelblue' store={this.props.store} player={this.props.player}/>
+          <ColorIcon color='aqua' store={this.props.store} player={this.props.player}/>
+          <ColorIcon color='slategrey' store={this.props.store} player={this.props.player}/>
+          <ColorIcon color='seagreen' store={this.props.store} player={this.props.player}/>
+          <ColorIcon color='orangered' store={this.props.store} player={this.props.player}/>
+          <ColorIcon color='deeppink' store={this.props.store} player={this.props.player}/>
+          <ColorIcon color='mintcream' store={this.props.store} player={this.props.player}/>
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  }
+
+  setViewRef(ref) {
+    this.setState({ viewRef: findNodeHandle(ref) });
+  }
+
+  getBlurView () {
+    return Platform.OS === 'ios' ? this.getIOSDiceBlurView() : this.getAndroidBlurView()
+    //<BlurView
+    //blurRadius={10}
+    //downsampleFactor={5}
+    //overlayColor={'rgba(255, 255, 255, 0.1)'}
+    //style={styles.blurView}
+    //viewRef={this.state.viewRef}
+  ///>
+  }
+
+  getBlurredBGColorViewAndroid () {
+
+  }
+
+  getBlurredBGColorView () {
+    return Platform.OS === 'ios' ? this.getBlurredBGColorViewIOS() : this.getAndroidBlurView()
+  }
+
+  getBlurredBGColorViewIOS () {
+    return (
+      <TouchableWithoutFeedback>
+        <BlurView blurType="light" style={[styles.bgColorContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
+          <View style={[styles.bgColorContentContainer]}>
+            <ColorIcon color='deepskyblue' store={this.props.store} player={this.props.player}/>
+            <ColorIcon color='steelblue' store={this.props.store} player={this.props.player}/>
+            <ColorIcon color='aqua' store={this.props.store} player={this.props.player}/>
+            <ColorIcon color='slategrey' store={this.props.store} player={this.props.player}/>
+            <ColorIcon color='seagreen' store={this.props.store} player={this.props.player}/>
+            <ColorIcon color='orangered' store={this.props.store} player={this.props.player}/>
+            <ColorIcon color='deeppink' store={this.props.store} player={this.props.player}/>
+            <ColorIcon color='mintcream' store={this.props.store} player={this.props.player}/>
+          </View>
+        </BlurView>
+      </TouchableWithoutFeedback>
+    )
+  }
+
   render () {
     const topPosition = this.state.dimensions.height / 2
     const leftPosition = this.state.dimensions.width / 2
@@ -360,21 +473,7 @@ export default class Counter extends Component {
       }
 
       {
-        this.props.player.isBackgroundColorViewVisible ?
-          <TouchableWithoutFeedback>
-            <BlurView blurType="light" style={[styles.bgColorContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}>
-            <View style={[styles.bgColorContentContainer]}>
-              <ColorIcon color='deepskyblue' store={this.props.store} player={this.props.player}/>
-              <ColorIcon color='steelblue' store={this.props.store} player={this.props.player}/>
-              <ColorIcon color='aqua' store={this.props.store} player={this.props.player}/>
-              <ColorIcon color='slategrey' store={this.props.store} player={this.props.player}/>
-              <ColorIcon color='seagreen' store={this.props.store} player={this.props.player}/>
-              <ColorIcon color='orangered' store={this.props.store} player={this.props.player}/>
-              <ColorIcon color='deeppink' store={this.props.store} player={this.props.player}/>
-              <ColorIcon color='mintcream' store={this.props.store} player={this.props.player}/>
-            </View>
-            </BlurView>
-          </TouchableWithoutFeedback> : null
+        this.props.player.isBackgroundColorViewVisible ? this.getBlurredBGColorView() : null
       }
     </View>
     )
@@ -451,5 +550,18 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  blurView: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    right: 0
+  },
+
+  container1: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
 })

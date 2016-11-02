@@ -1,5 +1,8 @@
 <component name="libraryTable">
   <library name="react-native-0.19.1">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/../node_modules/react-native-blur/android/build/intermediates/exploded-aar/com.facebook.react/react-native/0.19.1/annotations.zip!/" />
+    </ANNOTATIONS>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../node_modules/react-native-blur/android/build/intermediates/exploded-aar/com.facebook.react/react-native/0.19.1/res" />
       <root url="jar://$PROJECT_DIR$/../node_modules/react-native-blur/android/build/intermediates/exploded-aar/com.facebook.react/react-native/0.19.1/jars/libs/infer-annotations-1.5.jar!/" />
