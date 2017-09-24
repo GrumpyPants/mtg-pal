@@ -13,6 +13,7 @@
     "react-native": "0.30.0",
     "react-native-animatable": "^0.6.1",
     "react-native-blur": "1.1.2",
+    "react-native-keep-awake": "1.07",
     "react-native-linear-gradient": "^1.5.12",
     "react-native-overlay": "^0.4.2",
     "react-native-shake-event-ios": "^1.0.3",

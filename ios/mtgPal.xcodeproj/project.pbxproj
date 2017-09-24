@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -37,6 +36,7 @@
 		AE8BC4C8AE3849819F69FF75 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972B0251B97146E58D40D567 /* Entypo.ttf */; };
 		B0DDB5AD6B87426F9ECC8D35 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A4ACAC9B15749CDB374842E /* Zocial.ttf */; };
 		BE80C89C07D44842ADFC923A /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21DF93737A504513B064BBC4 /* Octicons.ttf */; };
+		E4202289112F42D7BF607E46 /* libKCKeepAwake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4723E6C64C4E1DA3B8112A /* libKCKeepAwake.a */; };
 		F786F39D1BBD4F2C9E7D2B19 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C29747C9F3E649C9BDF5BBE0 /* libRNVectorIcons.a */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +146,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		635D0AEC1F784C3300D10B18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFB40630428B40D4A6BF03A2 /* KCKeepAwake.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = KCKeepAwake;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -203,8 +210,10 @@
 		B434DD0938B34674976D0B0A /* RNBlur.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
 		B856D419F2294081BC5CF83B /* libRNBlur.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBlur.a; sourceTree = "<group>"; };
 		C29747C9F3E649C9BDF5BBE0 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
+		CFB40630428B40D4A6BF03A2 /* KCKeepAwake.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = KCKeepAwake.xcodeproj; path = "../node_modules/react-native-keep-awake/ios/KCKeepAwake.xcodeproj"; sourceTree = "<group>"; };
 		D1E24019FDA44C49ABB3D679 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		E741684BEA154DBEB554C01D /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "../node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
+		EB4723E6C64C4E1DA3B8112A /* libKCKeepAwake.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libKCKeepAwake.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +245,7 @@
 				70908FC8930B455FB884A15E /* libRNOverlay.a in Frameworks */,
 				2067B10AD51B424EA561FE87 /* libRNShakeEvent.a in Frameworks */,
 				F786F39D1BBD4F2C9E7D2B19 /* libRNVectorIcons.a in Frameworks */,
+				E4202289112F42D7BF607E46 /* libKCKeepAwake.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +371,7 @@
 				95D538B9246B4D9FAC0A169F /* libRNOverlay.a */,
 				91F7CA8900564EEC83D2BF22 /* libRNShakeEvent.a */,
 				C29747C9F3E649C9BDF5BBE0 /* libRNVectorIcons.a */,
+				EB4723E6C64C4E1DA3B8112A /* libKCKeepAwake.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -413,6 +424,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		635D0AE91F784C3100D10B18 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				635D0AED1F784C3300D10B18 /* libKCKeepAwake.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +459,7 @@
 				E741684BEA154DBEB554C01D /* RNOverlay.xcodeproj */,
 				7E5E3D232BE54E219EA55D5F /* RNShakeEvent.xcodeproj */,
 				9BE38D9B71B948298B8D3660 /* RNVectorIcons.xcodeproj */,
+				CFB40630428B40D4A6BF03A2 /* KCKeepAwake.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -548,6 +568,10 @@
 				{
 					ProductGroup = 6351523F1F77130F00A9055C /* Products */;
 					ProjectRef = 99FB7418D43941719D97B189 /* BVLinearGradient.xcodeproj */;
+				},
+				{
+					ProductGroup = 635D0AE91F784C3100D10B18 /* Products */;
+					ProjectRef = CFB40630428B40D4A6BF03A2 /* KCKeepAwake.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -717,6 +741,13 @@
 			remoteRef = 6351524C1F77131000A9055C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		635D0AED1F784C3300D10B18 /* libKCKeepAwake.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKCKeepAwake.a;
+			remoteRef = 635D0AEC1F784C3300D10B18 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -838,6 +869,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mtgPal.app/mtgPal";
@@ -854,6 +886,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -882,6 +915,7 @@
 					"$(SRCROOT)/../node_modules/react-native-overlay",
 					"$(SRCROOT)/../node_modules/react-native-shake-event-ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-keep-awake/ios",
 				);
 				INFOPLIST_FILE = mtgPal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -911,6 +945,7 @@
 					"$(SRCROOT)/../node_modules/react-native-overlay",
 					"$(SRCROOT)/../node_modules/react-native-shake-event-ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-keep-awake/ios",
 				);
 				INFOPLIST_FILE = mtgPal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -969,6 +1004,7 @@
 					"$(SRCROOT)/../node_modules/react-native-overlay",
 					"$(SRCROOT)/../node_modules/react-native-shake-event-ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-keep-awake/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1015,6 +1051,7 @@
 					"$(SRCROOT)/../node_modules/react-native-overlay",
 					"$(SRCROOT)/../node_modules/react-native-shake-event-ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-keep-awake/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

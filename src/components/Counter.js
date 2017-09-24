@@ -485,13 +485,13 @@ const styles = StyleSheet.create({
     transform: [{rotate: '270deg'}],
   },
   minusIcon: {
-    height: 30,
-    width: 30,
+    height: 60,
+    width: 60,
     position: 'absolute',
   },
   plusIcon: {
-    height: 30,
-    width: 30,
+    height: 60,
+    width: 60,
     position: 'absolute',
   },
   touchableOpacityContainer: {
