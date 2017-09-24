@@ -14,30 +14,6 @@ class MTGHelperStore {
   playingSound = false
 
   constructor () {
-    this.tickTockSound = new Sound('tickTock.mp3', Sound.MAIN_BUNDLE)
-    this.tadaSound = new Sound('tada.mp3', Sound.MAIN_BUNDLE)
-  }
-
-  playTickTockSound () {
-    if (!this.playingSound) {
-      this.playingSound = true
-      this.tickTockSound.play()
-    }
-  }
-
-  stopTickTockSound () {
-    if (this.playingSound) {
-      this.tickTockSound.stop()
-      this.tadaSound.stop()
-      this.playingSound = false
-    }
-  }
-
-  playTadaSound () {
-    if (!this.playingSound) {
-      //this.playingSound = true
-      this.tadaSound.play()
-    }
   }
 
   setNumPlayers (numPlayers) {

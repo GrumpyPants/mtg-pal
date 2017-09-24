@@ -6,17 +6,18 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "droll": "^0.2.1",
     "mobx": "^2.3.5",
     "mobx-react": "^3.5.0",
-    "react": "^15.1.0",
+    "react": "~15.3.2",
     "react-native": "0.30.0",
     "react-native-animatable": "^0.6.1",
-    "react-native-blur": "^1.0.0",
+    "react-native-blur": "1.1.2",
     "react-native-linear-gradient": "^1.5.12",
     "react-native-overlay": "^0.4.2",
     "react-native-shake-event-ios": "^1.0.3",
     "react-native-sound": "^0.8.3",
-    "react-native-timer": "^1.1.2",
+    "react-native-timer": "^1.0.0",
     "react-native-vector-icons": "^2.0.3"
   },
   "devDependencies": {

@@ -49,25 +49,6 @@ export default class Counter extends Component {
 
   constructor (props) {
     super(props)
-
-    this.clickSound = new Sound('click.wav', Sound.MAIN_BUNDLE, (error) => {
-      if (error) {
-        console.log('failed to load the sound', error);
-      } else { // loaded successfully
-        console.log('duration in seconds: ' + this.clickSound.getDuration() +
-          'number of channels: ' + this.clickSound.getNumberOfChannels());
-      }
-    })
-
-    this.tadaSound = new Sound('tada.mp3', Sound.MAIN_BUNDLE, (error) => {
-      if (error) {
-        console.log('failed to load the sound', error);
-      } else { // loaded successfully
-        console.log('duration in seconds: ' + this.tadaSound.getDuration() +
-          'number of channels: ' + this.tadaSound.getNumberOfChannels());
-      }
-    })
-
     this.state = {
      value: this.props.initialValue,
      dimensions: {},
@@ -91,8 +72,6 @@ export default class Counter extends Component {
     const _this = this
     this.setState({isWinner: false})
 
-    this.props.store.playTickTockSound()
-
     timer.setInterval(_this, 'diceRollInterval', () => {
       _this.setState({roll: Math.floor(Math.random() * 6) + 1})
     }, 200);
@@ -101,9 +80,7 @@ export default class Counter extends Component {
       timer.clearInterval(_this, 'diceRollInterval')
       _this.setState({roll: _this.props.player.roll, isWinner: _this.props.player.winner})
       _this.props.store.isRollingDiceAnimationActive = false
-      _this.props.store.stopTickTockSound()
       if (_this.props.player.winner && _this.props.store.isRollingDiceViewVisible) {
-        _this.props.store.playTadaSound()
         _this.refs.diceView.tada(1600)
       }
     }, 2000);
@@ -113,8 +90,18 @@ export default class Counter extends Component {
     this.setState({dimensions: event.nativeEvent.layout})
   }
 
+  playClickSound () {
+    const clickSound = new Sound('click_04.aif', Sound.MAIN_BUNDLE, (error) => {
+      if (error) {
+        console.log('failed to load the sound', error);
+      } else { // loaded successfully
+        clickSound.play()
+      }
+    })
+  }
+
   onDecrementPressDownHandler (decrementValue = 1) {
-    this.clickSound.play()
+    this.playClickSound()
     const life = this.props.player.life - decrementValue
     this.props.player.life = life
   }
@@ -124,7 +111,7 @@ export default class Counter extends Component {
   }
 
   onIncrementPressDownHandler (incrementValue = 1) {
-    this.clickSound.play()
+    this.playClickSound()
     this.props.player.life = this.props.player.life  + incrementValue
   }
 
@@ -283,18 +270,18 @@ export default class Counter extends Component {
               onLayout={this.imageLoaded.bind(this)}
         >
 
-          <Image
-            source={require('../img/grayBackground.png')}
-            style={[styles.bgColorContentContainer, styles.bgColorContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}
-            ref={'backgroundImage'}
-            onLoadEnd={this.imageLoaded.bind(this)}
-          >
-            <BlurView
-              blurRadius={10}
-              downsampleFactor={5}
-              overlayColor={'rgba(255, 255, 255, 0.1)'}
-              viewRef={this.state.viewRef}/>
-          </Image>
+          {/*<Image*/}
+            {/*source={require('../img/grayBackground.png')}*/}
+            {/*style={[styles.bgColorContentContainer, styles.bgColorContainer, {width: this.state.dimensions.width, height: this.state.dimensions.height}]}*/}
+            {/*ref={'backgroundImage'}*/}
+            {/*onLoadEnd={this.imageLoaded.bind(this)}*/}
+          {/*>*/}
+            {/*<BlurView*/}
+              {/*blurRadius={10}*/}
+              {/*downsampleFactor={5}*/}
+              {/*overlayColor={'rgba(255, 255, 255, 0.1)'}*/}
+              {/*viewRef={this.state.viewRef}/>*/}
+          {/*</Image>*/}
 
           <ColorIcon color='deepskyblue' store={this.props.store} player={this.props.player}/>
           <ColorIcon color='steelblue' store={this.props.store} player={this.props.player}/>
