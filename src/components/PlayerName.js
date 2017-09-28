@@ -32,7 +32,7 @@ export default class PlayerName extends Component {
 
   render () {
     return (
-      <View onLayout={this.onLayoutChange.bind(this)}>
+      <View onLayout={this.onLayoutChange.bind(this)} pointerEvents='none'>
         <Text style={[{fontSize: this.props.fontSize}]}>
           {this.props.playerName}
         </Text>

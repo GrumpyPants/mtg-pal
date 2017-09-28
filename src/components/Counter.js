@@ -54,6 +54,10 @@ export default class Counter extends Component {
      dimensions: {},
      roll: null
     }
+
+    // make a pool of sound handlers to reduce the likelihood of the tap sound not working
+    // https://github.com/zmxv/react-native-sound/issues/9
+    this.tapSoundPool = this.createSoundPool('click_04.aif')
   }
 
   componentWillReceiveProps (newProps){
@@ -66,6 +70,11 @@ export default class Counter extends Component {
     //if (this.refs.backgroundImage) {
     //  this.setState({viewRef: findNodeHandle(this.refs.backgroundImage)})
     //}
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.longPressDecrementTimer)
+    clearInterval(this.longPressIncrementTimer)
   }
 
   doDiceRollAnimation () {
@@ -91,13 +100,17 @@ export default class Counter extends Component {
   }
 
   playClickSound () {
-    const clickSound = new Sound('click_04.aif', Sound.MAIN_BUNDLE, (error) => {
-      if (error) {
-        console.log('failed to load the sound', error);
-      } else { // loaded successfully
-        clickSound.play()
-      }
-    })
+    const soundToPlay = this.tapSoundPool.find((sound) => sound.isPlaying === false)
+    if (soundToPlay) {
+      soundToPlay.isPlaying = true
+      soundToPlay.soundInstance.play((success) => {
+        if (success) {
+          soundToPlay.isPlaying = false
+        }
+      })
+    } else {
+      console.warn('Sound not played. No available instance in sound pool. Consider increasing the number of instances.')
+    }
   }
 
   onDecrementPressDownHandler (decrementValue = 1) {
@@ -107,7 +120,7 @@ export default class Counter extends Component {
   }
 
   onLongDecrementPressDownHandler (decrementValue = 5) {
-    timer.setInterval('decrement', this.onDecrementPressDownHandler.bind(this, decrementValue), 400);
+    this.longPressDecrementTimer = timer.setInterval('decrement', this.onDecrementPressDownHandler.bind(this, decrementValue), 400);
   }
 
   onIncrementPressDownHandler (incrementValue = 1) {
@@ -116,7 +129,7 @@ export default class Counter extends Component {
   }
 
   onLongIncrementPressDownHandler (incrementValue = 5) {
-    timer.setInterval('increment', this.onIncrementPressDownHandler.bind(this, incrementValue), 400);
+    this.longPressIncrementTimer = timer.setInterval('increment', this.onIncrementPressDownHandler.bind(this, incrementValue), 400);
   }
 
   onPressOutHandler (intervalName) {
@@ -374,14 +387,14 @@ export default class Counter extends Component {
       case 'left':
         counterNumberSize = this.state.dimensions.height ? this.state.dimensions.height / 3 : 120
         playerNameStyleObject.top = this.state.dimensions.height / 2
-        playerNameStyleObject.right = - counterNumberSize / 4 - 10
+        playerNameStyleObject.right = - counterNumberSize / 4
         numberStyleObject.top = this.state.dimensions.height / 2
         numberStyleObject.left = this.state.dimensions.width / 2
         break
       case 'right':
         counterNumberSize = this.state.dimensions.height ? this.state.dimensions.height / 3 : 120
         playerNameStyleObject.top = this.state.dimensions.height / 2
-        playerNameStyleObject.left = counterNumberSize / 4 - 10
+        playerNameStyleObject.left = counterNumberSize / 4
         numberStyleObject.top = this.state.dimensions.height / 2
         numberStyleObject.left = this.state.dimensions.width / 2 + 10
         break
@@ -426,13 +439,13 @@ export default class Counter extends Component {
 
       {incrementDecrementSections}
 
-      <View style={[styles.number, numberStyleObject, counterDirection]}>
+      <View style={[styles.number, numberStyleObject, counterDirection]} pointerEvents='none'>
         <CounterNumber fontSize={counterNumberSize}
                        value={this.props.player.life}
                        onLayoutChange={this.updateNumberMargins.bind(this)}/>
       </View>
 
-      <View style={[styles.playerName, playerNameStyleObject, counterDirection]}>
+      <View style={[styles.playerName, playerNameStyleObject, counterDirection]} pointerEvents='none'>
         <PlayerName fontSize={counterNumberSize / 4}
                     playerName={this.props.player.name}
                     onLayoutChange={this.updatePlayerNameMargins.bind(this)}/>
@@ -464,6 +477,24 @@ export default class Counter extends Component {
       }
     </View>
     )
+  }
+
+  createSoundPool (soundFile, num = 5) {
+    const soundPool = []
+    for (let i = 0; i < num; i++) {
+      const sound = new Sound(soundFile, Sound.MAIN_BUNDLE, (error) => {
+        if (error) {
+          console.error('failed to load the sound', error);
+        }
+      })
+
+      soundPool.push({
+        isPlaying: false,
+        soundInstance: sound,
+      })
+    }
+
+    return soundPool
   }
 }
 
